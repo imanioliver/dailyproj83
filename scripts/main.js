@@ -11,25 +11,31 @@
 
 
 function handValue(hand) {
-  console.log (hand);
-  let value = 0
-  for (var i = 0; i < hand.length; i++) {
-    console.log("Looking at: ", hand[i]);
-    if (hand[i]=="J" || hand[i] =="Q" || hand[i] =="K" ) {//if number, add the valu
-      value += 10;
-    } else if (hand[i]=="A") {
-        if (value >=10){
-          value += 11;
-        }else if (value<=10){
-          value += 1;
+    console.log (hand);
+    let value = 0
+
+    let aceIn = false;
+    for (var i = 0; i < hand.length; i++) {
+        console.log("Looking at: ", hand[i]);
+        if (hand[i]=="J" || hand[i] =="Q" || hand[i] =="K" ) {//if number, add the valu
+            value += 10;
         }
-    } else {
-      value += parseInt(hand[i])
+
+        else if  (hand[i]=="A") {
+            value += 11;
+            aceIn = true;
+        }
+        else {
+            value += Number(hand[i])
+        }
+
+        if (value > 21 && aceIn === true){
+            value -=10;
+        }
     }
-  }
-  console.log(value);
-  return value;
-}
+    console.log(value);
+    return value;
+};
 
 
 /* -----  Hints ------
@@ -39,3 +45,12 @@ K, Q, J ==> Worth 10
 A       ==> Worth 1 or 11
 
 */
+
+// if (value >=10){
+//   value += 11;
+// }else if (value<=10){
+//   value += 1;
+// // }
+// else {
+//   value += parseInt(hand[i])
+// }
